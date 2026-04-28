@@ -31,9 +31,9 @@ Raw Data → ETL & Feature Engineering → Clean Dataset → EDA → Statistical
 
 ### Dashboard Preview
 
-![Dashboard 1](tableau/screenshots/dashboard1.png)
-![Dashboard 2](tableau/screenshots/dashboard2.png)
-![Dashboard 3](tableau/screenshots/dashboard3.png)
+![Dashboard 1](tableau/screenshots/Dashboard1.png)
+![Dashboard 2](tableau/screenshots/Dashboard2.png)
+![Dashboard 3](tableau/screenshots/Dashboard3.png)
  **Live Dashboard:**  
 https://public.tableau.com/views/DVA-Capstone/ExecutiveDashboard?:language=en-GB&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
 #  Final Dashboard Overview

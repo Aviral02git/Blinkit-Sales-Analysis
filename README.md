@@ -27,7 +27,15 @@ The goal of this project is to answer key business questions:
 Raw Data → ETL & Feature Engineering → Clean Dataset → EDA → Statistical Analysis → Tableau Dashboard
 
 ---
+## 📊 Tableau Dashboard
 
+### Dashboard Preview
+
+![Dashboard 1](tableau/screenshots/dashboard1.png)
+![Dashboard 2](tableau/screenshots/dashboard2.png)
+![Dashboard 3](tableau/screenshots/dashboard3.png)
+ **Live Dashboard:**  
+https://public.tableau.com/views/DVA-Capstone/ExecutiveDashboard?:language=en-GB&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
 #  Final Dashboard Overview
 
 The dashboard is divided into **3 major sections**:

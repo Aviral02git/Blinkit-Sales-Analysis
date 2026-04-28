@@ -1,178 +1,237 @@
-# E_G-16_Blinkit-Sales-Analysis
+#  Blinkit Sales, Delivery & Customer Analytics Dashboard
 
-Blinkit sales, operations, and customer analytics project with a complete notebook workflow for ETL, EDA, statistical testing, and dashboard-load preparation.
+This project presents a **complete end-to-end analytics solution** for Blinkit, covering **data engineering, analysis, and interactive dashboarding**.
 
-## 1) Project Goal
+It transforms raw operational data into **business insights** across:
 
-This project builds a decision-ready analytics dataset and analysis layer for Blinkit so business users can evaluate:
-- order and revenue trends,
-- delivery performance and delay behavior,
-- customer segment behavior,
-- category and area-level performance,
-- KPI health for dashboard reporting.
+* Revenue performance
+* Delivery efficiency
+* Customer behavior & satisfaction
 
-The final design follows this flow:
-`Raw Sources -> Cleaning/ETL -> Curated Dataset -> EDA -> Statistical Validation -> Dashboard Load Files`
+---
 
-## 2) Current Repository Layout
+#  Project Objective
 
-### Root
-- `README.md`: Detailed project documentation and run guide.
-- `etl_log_blinkit_updated.docx`: Narrative ETL log and processing reference.
+The goal of this project is to answer key business questions:
 
-### `data/raw/` (source-of-truth, do not edit in place)
-- `blinkit_customer_feedback.csv`
-- `blinkit_customers.csv`
-- `blinkit_delivery_performance.csv`
-- `blinkit_inventory.csv`
-- `blinkit_inventory_new.csv`
-- `blinkit_marketing_performance.csv`
-- `blinkit_order_items.csv`
-- `blinkit_orders.csv`
-- `blinkit_products.csv`
-- `category_icons.xlsx`
-- `Rating_Icon.xlsx`
+*  How is revenue performing over time?
+*  Where are delivery delays happening and why?
+*  Which customers drive revenue?
+*  What is causing poor customer satisfaction?
+*  How can operations be optimized?
 
-### `data/processed/`
-- `blinkit_cleaned_dashboard_data.csv`: Canonical cleaned dataset consumed by all analysis notebooks.
+---
 
-### `notebooks/`
-- `02_cleaning.ipynb`: ETL and feature engineering.
-- `03_eda.ipynb`: Exploratory analysis with trend/distribution/outlier views.
-- `04_statistical_analysis.ipynb`: Correlation, regression, and hypothesis tests.
-- `05_final_load_prep.ipynb`: KPI table + dashboard-ready extracts.
+#  Project Workflow
 
-## 3) Dataset Roles (High Level)
+Raw Data → ETL & Feature Engineering → Clean Dataset → EDA → Statistical Analysis → Tableau Dashboard
 
-- Orders: transaction-level values and order timestamps.
-- Order Items: line-item product, quantity, and unit-price details.
-- Products: product/category/brand and pricing attributes.
-- Customers: profile, segment, and geography information.
-- Delivery Performance: promised vs actual delivery times and delay information.
-- Feedback: rating/sentiment/feedback tags.
-- Marketing and Inventory: supporting operational/business context (explored separately in ETL notes).
+---
 
-## 4) Notebook-by-Notebook Details
+#  Final Dashboard Overview
 
-### `02_cleaning.ipynb` (ETL + Feature Engineering)
+The dashboard is divided into **3 major sections**:
 
-Main responsibilities:
-1. Load all raw files into independent DataFrames.
-2. Standardize column naming style (`lowercase_with_underscores`).
-3. Remove duplicate rows across source tables.
-4. Handle missing values (for example, delay reason defaults).
-5. Convert datetime columns used for time-based features.
-6. Engineer pre-merge features (`total_price`, `hour`, `day`, `month`, `weekday`, `is_delayed`, `delay_minutes`).
-7. Merge sources into a unified master DataFrame using left joins.
-8. Resolve post-merge duplicate columns and naming conflicts.
-9. Compute advanced operational features:
-	- `promised_duration_minutes`
-	- `actual_duration_minutes`
-	- `delivery_efficiency`
-	- `delay_category` / `delay_bucket`
-	- `order_value_bucket`
-	- `order_size`
-	- `is_peak`
-10. Run validation checks (negative delays, price consistency, types, uniqueness).
-11. Export final cleaned dataset.
+---
 
-Output target:
-- Canonical cleaned dataset used by the rest of the project.
+##  1. BUSINESS OVERVIEW
 
-### `03_eda.ipynb` (Exploratory Data Analysis)
+###  KPIs
 
-Main responsibilities:
-1. Load cleaned dataset from `data/processed`.
-2. Run structural profiling:
-	- shape,
-	- dtype inventory,
-	- missing percentage,
-	- descriptive stats.
-3. Create order-level analytical view (deduplicate `order_id` to avoid double counting).
-4. Build trend views:
-	- monthly orders,
-	- monthly revenue,
-	- average order value over time,
-	- weekday performance.
-5. Plot distributions for core metrics:
-	- `order_total`,
-	- `actual_duration_minutes`,
-	- `distance_km`,
-	- `rating`.
-6. Detect outliers using IQR and produce outlier summaries.
-7. Produce business slices:
-	- category performance,
-	- customer segment performance.
+* Total Revenue
+* Total Orders
+* Avg Order Value
+* Avg Margin
 
-Why this stage matters:
-- It identifies trends, spread, anomalies, and segment behavior before inferential testing.
+ Provides a **quick snapshot of business health**
 
-### `04_statistical_analysis.ipynb` (Inferential Layer)
+---
 
-Main responsibilities:
-1. Load cleaned dataset and derive order-level view.
-2. Compute correlation matrix across selected numeric business variables.
-3. Fit linear regression for `order_total` with selected predictors.
-4. Evaluate model fit (coefficients + $R^2$ + actual vs predicted scatter).
-5. Run hypothesis tests when required columns exist:
-	- Welch t-test: delayed vs non-delayed order value,
-	- ANOVA: order value across customer segments,
-	- Chi-square: payment method vs delay status.
+###  Revenue Trend (Line Chart)
 
-Why this stage matters:
-- It turns descriptive observations into statistically testable insights.
+**Why used:** Shows time-based trends
 
-### `05_final_load_prep.ipynb` (KPI + Dashboard Tables)
+**Insight:**
+Revenue peaks mid-year and drops towards year-end → indicates **seasonality or demand fluctuations**
 
-Main responsibilities:
-1. Load cleaned dataset and create order-level frame.
-2. Compute key KPI set (orders, revenue, AOV, delay/on-time rates, durations, ratings, peak-hour share, active customers).
-3. Build final dashboard tables:
-	- order-level final table,
-	- category summary table,
-	- area summary table.
-4. Export files to `data/processed/`.
+---
 
-Generated files when notebook is executed:
-- `blinkit_kpis.csv`
-- `tableau_final_orders.csv`
-- `tableau_final_category_summary.csv`
-- `tableau_final_area_summary.csv`
+###  Revenue vs Margin (Scatter Plot)
 
-## 5) Current Cleanup State
+**Why used:** Shows relationship between profitability & sales
 
-Repository was intentionally cleaned to reduce clutter:
-- kept only canonical cleaned file in `data/processed/` (`blinkit_cleaned_dashboard_data.csv`),
-- removed generated dashboard extracts (they are reproducible by running `05_final_load_prep.ipynb`),
-- removed local virtual environments from project folder (`.venv`, `.venv-1`, `.venv-2`, `.venv-3`).
+**Insight:**
+Some categories have **high revenue but lower margins** → optimization opportunity
 
-## 6) Naming Normalization Applied
+---
 
-- `FINAL(3)_CLEANED_DASHBOARD_DATA (1).csv` -> `data/processed/blinkit_cleaned_dashboard_data.csv`
-- `data/raw/blinkit_orders (1).csv` -> `data/raw/blinkit_orders.csv`
-- `data/raw/Category_Icons (1).xlsx` -> `data/raw/category_icons.xlsx`
-- `data/raw/blinkit_inventoryNew.csv` -> `data/raw/blinkit_inventory_new.csv`
-- `ETL_Log_Blinkit_Updated.docx` -> `etl_log_blinkit_updated.docx`
+###  Top Revenue Drivers (Bar Chart)
 
-## 7) Reproducible Run Order
+**Insight:**
+Categories like **Dairy & Breakfast and Household Care** contribute the most → should be prioritized
 
-Use this order for complete regeneration of analysis artifacts:
-1. Run `notebooks/02_cleaning.ipynb`.
-2. Run `notebooks/03_eda.ipynb`.
-3. Run `notebooks/04_statistical_analysis.ipynb`.
-4. Run `notebooks/05_final_load_prep.ipynb`.
+---
 
-## 8) Data Governance Rules
+###  Payment Method Split
 
-- Never edit files directly in `data/raw/`.
-- Treat `data/processed/blinkit_cleaned_dashboard_data.csv` as canonical curated output.
-- Treat KPI/Tableau exports as reproducible derivatives.
-- Keep logic changes in notebooks with clear markdown explanations.
+**Insight:**
+Card & UPI dominate → strong **digital adoption**
 
-## 9) Notes for Review and Viva
+---
 
-- Project uses both line-item and order-level views intentionally.
-- Order-level deduplication is critical for trend and inferential correctness.
-- Delay and duration metrics are engineered from timestamp differences.
-- Statistical tests are conditionally executed based on column presence and SciPy availability.
+###  Delivery Status Impact
 
+**Insight:**
+Delayed orders still generate revenue → but impact **customer experience**
+
+---
+
+##  2. DELIVERY EFFICIENCY & OPERATIONS
+
+###  KPIs
+
+* Avg Delay Time
+* % Delayed Orders (~62%) 
+* Avg Distance
+* Avg Delivery Time
+
+ Highlights **operational inefficiency**
+
+---
+
+###  Avg Delay by Hour
+
+**Why used:** Identifies peak problem hours
+
+**Insight:**
+Delays are higher during peak hours → **capacity issue**
+
+---
+
+###  Peak vs Off-Peak Delay
+
+**Insight:**
+Peak hours have significantly more delay → confirms **operational overload**
+
+---
+
+###  Slowest Stores (Packed Bubble Chart)
+
+**Why used:**
+Shows **which stores contribute most to delays**
+
+**Insight:**
+Few stores dominate delays → **targeted improvement needed**
+
+---
+
+###  Top Delivery Partners by Delays
+
+**Insight:**
+Certain partners are responsible for high delays → **performance monitoring required**
+
+---
+
+##  3. CUSTOMER INSIGHTS & SATISFACTION
+
+###  KPIs
+
+* Total Customers
+* Avg Rating (~3.3 ⭐) 
+* Revenue per Customer
+* Repeat Customer % (~94%)
+
+ Shows **customer loyalty vs satisfaction gap**
+
+---
+
+###  Customer Segment Distribution (Donut Chart)
+
+**Why used:** Shows proportion
+
+**Insight:**
+Customers are evenly distributed → no heavy dependency on one segment
+
+---
+
+###  Revenue by Customer Segment
+
+**Insight:**
+Regular & Premium customers drive most revenue → **high-value segments**
+
+---
+
+###  Feedback Distribution (Bubble Chart)
+
+**Insight:**
+~63% feedback is negative → major **service issues**
+
+---
+
+###  Customer Retention
+
+**Insight:**
+High repeat rate despite issues → customers stay, but risk of future churn
+
+---
+
+###  Rating Distribution
+
+**Insight:**
+Most ratings are average (3–4) → indicates **moderate satisfaction**
+
+---
+
+#  Key Business Findings
+
+*  62% orders are delayed → major operational issue
+*  Peak hours cause maximum delays
+*  Few stores & partners drive most delays
+*  63% customer feedback is negative
+*  Ratings are average (~3.3)
+*  Revenue is strong but customer experience is weak
+
+---
+
+#  Recommendations
+
+* Optimize **peak-hour delivery capacity**
+* Monitor and improve **underperforming stores**
+* Track **delivery partner performance**
+* Improve **customer experience to reduce negative feedback**
+* Focus on **high-value customer segments**
+
+---
+
+#  How to Run
+
+1. Run `02_cleaning.ipynb`
+2. Run `03_eda.ipynb`
+3. Run `04_statistical_analysis.ipynb`
+4. Run `05_final_load_prep.ipynb`
+5. Open Tableau dashboard
+
+---
+
+#  Key Learning
+
+This project demonstrates:
+
+* End-to-end data pipeline (ETL → Dashboard)
+* Business problem solving using data
+* Data visualization best practices
+* Insight-driven decision making
+
+---
+
+#  Final Conclusion
+
+While Blinkit shows **strong revenue performance**,
+there are **serious delivery and customer experience issues**.
+
+Improving delivery efficiency will directly lead to:
+ Higher customer satisfaction
+ Better ratings
+ Long-term business growth
+
+---

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Default Analytics | Swati Ghosh</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="brand" href="index.html">Swati Ghosh</a>
+      <div class="nav-links">
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#skills">Skills</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="project-hero">
+      <p class="eyebrow">DVA Case Study</p>
+      <h1>Loan Default Analytics Dashboard</h1>
+      <p>
+        A banking risk analytics project focused on understanding borrower default behavior,
+        identifying high-risk loan segments, and turning loan portfolio data into actionable
+        risk and pricing recommendations.
+      </p>
+      <div class="tag-row">
+        <span>Python</span>
+        <span>Data Cleaning</span>
+        <span>Risk Analysis</span>
+        <span>Pivot Tables</span>
+        <span>Dashboarding</span>
+      </div>
+      <div class="hero-actions">
+        <a class="button primary" href="reports/loan-default-report.pdf" target="_blank">Open Report</a>
+        <a class="button secondary" href="https://github.com/divyanshu-114/loan-defaulter-dashboard_and_data" target="_blank" rel="noreferrer">View GitHub Repo</a>
+      </div>
+    </section>
+
+    <section class="dashboard-showcase">
+      <img src="images/project_1.jpg" alt="Loan default risk and distribution dashboard">
+    </section>
+
+    <section class="detail-layout">
+      <article>
+        <h2>What The Project Talks About</h2>
+        <p>
+          This project studies borrower and loan application data to help banks understand which
+          applicants may be likely to default. The analysis considers income, gender, loan purpose,
+          region, credit score, debt-to-income ratio, loan-to-value ratio, interest rate, property
+          value, loan term, and other deterministic risk factors.
+        </p>
+        <p>
+          The dataset contains missing values and multicollinearity concerns, so the work focuses
+          on cleaning, standardization, imputation, feature preparation, and dashboard-ready
+          summaries that support risk mitigation and business decision-making.
+        </p>
+
+        <h2>My Contribution</h2>
+        <p>
+          I worked on transforming the raw loan data into a usable analytics asset by cleaning
+          inconsistent categories, handling missing values, standardizing columns, preparing
+          pivot-table calculations, and converting the results into dashboard insights and
+          recommendations for lending strategy.
+        </p>
+
+        <h2>Project Workflow</h2>
+        <div class="steps">
+          <div><strong>1. Dataset Understanding</strong><p>Reviewed borrower, credit, financial, collateral, application, and target default fields.</p></div>
+          <div><strong>2. Cleaning &amp; Preparation</strong><p>Standardized loan limits, credit worthiness, loan purpose, gender, ratios, income, and application fields.</p></div>
+          <div><strong>3. Risk Analysis</strong><p>Compared loan amount exposure, risk distribution, credit score ranges, age groups, occupancy, and regional LTV patterns.</p></div>
+          <div><strong>4. Dashboarding</strong><p>Built dashboard summaries for default probability, risk segmentation, demographic analysis, and financial KPIs.</p></div>
+        </div>
+
+        <h2>Key Insights</h2>
+        <ul class="clean-list">
+          <li>The total loan amount analyzed is approximately $6.6 billion.</li>
+          <li>High-risk loans account for 2,007 loans and around $675 million in exposure.</li>
+          <li>The 35-44 age group commands the highest total loan amount at about $1.67 billion.</li>
+          <li>The Central region has the highest average loan-to-value ratio at 76.69%.</li>
+          <li>Interest rates remain unusually stable across credit score ranges, suggesting the need for better risk-based pricing.</li>
+        </ul>
+
+        <h2>Recommendations</h2>
+        <ul class="clean-list">
+          <li>Apply stricter approval rules or additional buffers for high-risk borrower segments.</li>
+          <li>Review pricing strategy so better credit profiles receive more appropriate interest rates.</li>
+          <li>Use regional LTV differences to adjust collateral review and lending limits.</li>
+          <li>Tailor loan products and marketing for the dominant professional borrower segment.</li>
+        </ul>
+      </article>
+
+      <aside class="side-panel">
+        <h2>Project Snapshot</h2>
+        <dl>
+          <dt>Dataset</dt>
+          <dd>Kaggle loan borrower dataset</dd>
+          <dt>Target</dt>
+          <dd>Status: default or non-default</dd>
+          <dt>Total Exposure</dt>
+          <dd>Approximately $6.6 billion</dd>
+          <dt>Audience</dt>
+          <dd>Banking risk and lending teams</dd>
+        </dl>
+        <a href="reports/loan-default-report.pdf" target="_blank">Open report PDF</a>
+      </aside>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Dashboard Preview</p>
+        <h2>Loan Default Dashboard</h2>
+      </div>
+      <div class="wide-image">
+        <img src="images/project_1.jpg" alt="Loan default dashboard visual overview">
+      </div>
+    </section>
+
+    <section class="section link-list" id="dashboard-links">
+      <h2>Important Links</h2>
+      <a href="https://github.com/divyanshu-114/loan-defaulter-dashboard_and_data" target="_blank" rel="noreferrer">GitHub Repository</a>
+      <a href="reports/loan-default-report.pdf" target="_blank">Local Report PDF</a>
+      <a href="index.html#projects">Back to project list</a>
+    </section>
+  </main>
+
+  <footer class="footer simple-footer">
+    <p><a href="index.html">Back to portfolio</a></p>
+  </footer>
+</body>
+</html>

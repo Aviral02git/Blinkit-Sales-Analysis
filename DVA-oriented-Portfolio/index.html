@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aviral Mishra – Data Science Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #000000;
+      --bg2: #0a0a0a;
+      --bg3: #141414;
+      --border: #222222;
+      --border-hover: #333333;
+      --text: #eeeeee;
+      --muted: #888888;
+      --accent: #ffffff;
+      --tag-bg: #111111;
+      --tag-border: #222222;
+      --tag-text: #aaaaaa;
+      --card-bg: #050505;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 64px;
+    }
+    .nav-logo {
+      font-weight: 600; font-size: 1.1rem;
+      color: var(--text); letter-spacing: -0.5px;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 13px;
+      transition: color 0.2s; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ─── HERO ─── */
+    .hero {
+      max-width: 900px; margin: 0 auto;
+      padding: 8rem 2.5rem 5rem;
+      display: flex; flex-direction: column; align-items: flex-start;
+    }
+    .hero-eyebrow {
+      font-size: 13px; color: var(--muted); margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: inline-block;
+      width: 32px; height: 1px; background: var(--muted);
+    }
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 500; line-height: 1.1;
+      letter-spacing: -0.04em; margin-bottom: 1.5rem;
+    }
+    h1 span { color: var(--muted); }
+    .hero-sub {
+      font-size: 1.1rem; color: var(--muted);
+      max-width: 600px; line-height: 1.7; margin-bottom: 2.5rem;
+      font-weight: 400;
+    }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 3rem; }
+    .badge {
+      font-size: 12px; font-weight: 500;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px; color: var(--muted);
+      background: var(--bg2);
+      transition: all 0.2s;
+    }
+    .badge:hover { border-color: var(--text); color: var(--text); }
+    .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn {
+      font-size: 14px; font-weight: 500;
+      padding: 12px 24px; border-radius: 6px; cursor: pointer;
+      text-decoration: none; transition: all 0.2s; display: inline-flex;
+      align-items: center; justify-content: center;
+    }
+    .btn-primary {
+      background: var(--text); color: var(--bg);
+      border: 1px solid var(--text);
+    }
+    .btn-primary:hover { background: transparent; color: var(--text); }
+    .btn-ghost {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--text); background: var(--bg2); }
+
+    /* ─── CONTACT STRIP ─── */
+    .contact-strip {
+      max-width: 900px; margin: 0 auto;
+      padding: 0 2.5rem 4rem;
+      display: flex; flex-wrap: wrap; gap: 2rem;
+    }
+    .contact-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-item:hover { color: var(--text); }
+
+    /* ─── SECTION WRAPPER ─── */
+    section { max-width: 900px; margin: 0 auto; padding: 5rem 2.5rem; }
+    .section-header { margin-bottom: 3rem; }
+    .section-label {
+      font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
+      color: var(--muted); margin-bottom: 0.5rem; font-weight: 500;
+    }
+    h2 {
+      font-size: 2rem;
+      font-weight: 500; letter-spacing: -0.03em;
+    }
+    hr.divider {
+      border: none; border-top: 1px solid var(--border);
+      max-width: 900px; margin: 0 auto;
+    }
+
+    /* ─── SKILLS GRID ─── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 3rem 2rem;
+    }
+    .skill-cell {
+      padding: 0;
+    }
+    .skill-category {
+      font-size: 14px; font-weight: 500;
+      color: var(--text); margin-bottom: 1rem;
+      padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+    }
+    .skill-items {
+      font-size: 14px; color: var(--muted); line-height: 2;
+    }
+
+    /* ─── PROJECTS ─── */
+    .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 3rem; }
+    .filter-btn {
+      font-size: 13px; padding: 8px 16px; border-radius: 6px;
+      border: 1px solid var(--border); background: var(--bg2);
+      color: var(--muted); cursor: pointer; font-family: var(--font-sans);
+      transition: all 0.2s; font-weight: 500;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--text); color: var(--text);
+      background: var(--bg3);
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: pointer; display: flex; flex-direction: row;
+      align-items: stretch;
+    }
+    @media (max-width: 768px) {
+      .project-card { flex-direction: column; }
+    }
+    .project-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+    .project-thumb {
+      width: 240px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem; background: var(--bg3) !important;
+      border-right: 1px solid var(--border);
+    }
+    @media (max-width: 768px) {
+      .project-thumb { width: 100%; height: 160px; border-right: none; border-bottom: 1px solid var(--border); }
+    }
+    .project-body { padding: 2rem; flex: 1; display: flex; flex-direction: column; }
+    .project-title {
+      font-size: 1.25rem; font-weight: 500; margin-bottom: 0.5rem; letter-spacing: -0.02em;
+    }
+    .project-desc {
+      font-size: 14px; color: var(--muted); line-height: 1.6;
+      flex: 1; margin-bottom: 1.5rem;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem; }
+    .tag {
+      font-size: 12px;
+      padding: 4px 12px; border-radius: 4px;
+      background: var(--tag-bg); color: var(--tag-text);
+      border: 1px solid var(--tag-border);
+    }
+    .project-footer {
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .project-role { font-size: 13px; color: var(--muted); }
+    .project-link {
+      font-size: 13px; font-weight: 500;
+      color: var(--text); text-decoration: none;
+      display: flex; align-items: center; gap: 6px;
+      transition: gap 0.2s;
+    }
+    .project-link:hover { gap: 10px; }
+    .featured-band {
+      display: none;
+    }
+
+    /* ─── EDUCATION ─── */
+    .edu-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .edu-card {
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between;
+      align-items: flex-start; gap: 1rem;
+    }
+    .edu-card:last-child { border-bottom: none; padding-bottom: 0; }
+    @media (max-width: 600px) {
+      .edu-card { flex-direction: column; }
+      .edu-score-block { text-align: left; }
+    }
+    .edu-degree { font-size: 1.1rem; font-weight: 500; color: var(--text); }
+    .edu-school { font-size: 14px; color: var(--muted); margin-top: 4px; }
+    .edu-score-block { text-align: right; }
+    .edu-score {
+      font-size: 1.1rem; font-weight: 500; color: var(--text);
+    }
+    .edu-year { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); z-index: 200;
+      align-items: center; justify-content: center; padding: 2rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 12px; max-width: 640px; width: 100%;
+      padding: 2.5rem; position: relative; max-height: 90vh; overflow-y: auto;
+    }
+    .modal-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: transparent; border: none;
+      color: var(--muted); width: 32px; height: 32px;
+      cursor: pointer; font-size: 24px;
+      display: flex; align-items: center; justify-content: center;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--text); }
+    .modal-title {
+      font-size: 1.5rem; font-weight: 500; margin-bottom: 0.5rem;
+      padding-right: 2rem;
+    }
+    .modal-role { font-size: 14px; color: var(--muted); margin-bottom: 1.5rem; }
+    .modal-desc { font-size: 15px; color: var(--text); line-height: 1.6; margin-bottom: 1.5rem; }
+    .modal-highlights { margin-top: 1.5rem; padding-left: 1.2rem; }
+    .modal-highlights li {
+      font-size: 14px; color: var(--muted); line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+    .modal-footer { margin-top: 2rem; display: flex; gap: 12px; }
+    .modal-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem; }
+
+    /* ─── CONTRIBUTIONS ─── */
+    .contrib-section {
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 3rem 2rem; text-align: center; background: var(--bg2);
+    }
+    .contrib-num {
+      font-size: 4rem; font-weight: 500; color: var(--text); display: block; line-height: 1;
+    }
+    .contrib-label { font-size: 15px; color: var(--muted); margin-top: 0.5rem; }
+    .contrib-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+    .contrib-stat { padding: 1.5rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg3); }
+    .contrib-stat-num { font-size: 1.5rem; font-weight: 500; color: var(--text); }
+    .contrib-stat-label { font-size: 13px; color: var(--muted); margin-top: 0.25rem; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center; padding: 3rem 2.5rem;
+      font-size: 14px; color: var(--muted);
+    }
+    footer a { color: var(--text); text-decoration: none; margin: 0 0.5rem; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 680px) {
+      nav { padding: 0 1.2rem; }
+      section { padding: 4rem 1.2rem; }
+      .hero { padding: 6rem 1.2rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">aviral.dev</span>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="mailto:aviral.mishra2024@nst.rishihood.edu.in">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">Data Science & AI</p>
+  <h1>Aviral<br><span>Mishra</span></h1>
+  <p class="hero-sub">
+    AI undergraduate building end-to-end data solutions — from ETL pipelines and ML models
+    to GenAI workflows and interactive dashboards. Turning raw data into decisions.
+  </p>
+  <div class="hero-badges">
+    <span class="badge">Python</span>
+    <span class="badge">SQL</span>
+    <span class="badge">Tableau</span>
+    <span class="badge">Machine Learning</span>
+    <span class="badge">GenAI / LLM</span>
+    <span class="badge">ETL</span>
+  </div>
+  <div class="hero-ctas">
+    <a class="btn btn-primary" href="https://github.com/Aviral02git" target="_blank">GitHub Profile</a>
+    <a class="btn btn-ghost" href="https://linkedin.com/in/aviral-mishra" target="_blank">LinkedIn</a>
+    <a class="btn btn-ghost" href="mailto:aviral.mishra2024@nst.rishihood.edu.in">Get in Touch</a>
+  </div>
+</div>
+
+<!-- CONTACT STRIP -->
+<div class="contact-strip">
+  <a class="contact-item" href="mailto:aviral.mishra2024@nst.rishihood.edu.in">
+    ✉ aviral.mishra2024@nst.rishihood.edu.in
+  </a>
+  <span class="contact-item">
+    📞 +91 63882 44119
+  </span>
+  <span class="contact-item">
+    📍 Delhi NCR, India
+  </span>
+  <a class="contact-item" href="https://github.com/Aviral02git" target="_blank">
+    ⌥ github.com/Aviral02git
+  </a>
+</div>
+
+<hr class="divider" />
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <p class="section-label">Portfolio</p>
+    <h2>Featured Projects</h2>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
+    <button class="filter-btn" onclick="filterProjects('dva', this)">DVA</button>
+    <button class="filter-btn" onclick="filterProjects('ml', this)">Machine Learning</button>
+    <button class="filter-btn" onclick="filterProjects('genai', this)">GenAI</button>
+    <button class="filter-btn" onclick="filterProjects('analytics', this)">Analytics</button>
+  </div>
+
+  <div class="projects-grid" id="projects-grid">
+
+    <!-- DVA CAPSTONE -->
+    <div class="project-card" data-tags="dva analytics" onclick="openModal('dva-capstone')">
+      <div class="project-thumb">📊</div>
+      <div class="project-body">
+        <p class="project-title">DVA Capstone – Data Visualization & Analysis</p>
+        <p class="project-desc">End-to-end collaborative data analytics project covering preprocessing, EDA, and visual storytelling on real-world datasets.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Matplotlib</span>
+          <span class="tag">EDA</span>
+          <span class="tag">Jupyter</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-role">Data Preprocessing & Analysis (Collab)</span>
+          <a class="project-link" href="https://github.com/Aviral02git/DVA_capstone/tree/main" target="_blank">GitHub →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLINKIT SALES -->
+    <div class="project-card" data-tags="analytics dva" onclick="openModal('blinkit')">
+      <div class="project-thumb">🛒</div>
+      <div class="project-body">
+        <p class="project-title">Blinkit Sales, Delivery & Customer Analytics</p>
+        <p class="project-desc">Full ETL pipeline on 68K+ operational records — surfacing revenue trends, delivery bottlenecks, and customer satisfaction patterns via Tableau.</p>
+        <div class="project-tags">
+          <span class="tag">ETL</span>
+          <span class="tag">Tableau</span>
+          <span class="tag">Python</span>
+          <span class="tag">68K+ Records</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-role">ETL & Analysis</span>
+          <a class="project-link" href="https://github.com/SwatiGhosh121/E_G-16_Blinkit-Sales-Analysis" target="_blank">GitHub →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOLAR POWER PREDICTION -->
+    <div class="project-card" data-tags="ml genai" onclick="openModal('solar')">
+      <div class="project-thumb">☀️</div>
+      <div class="project-body">
+        <p class="project-title">Solar Power Prediction – ML & GenAI Forecasting</p>
+        <p class="project-desc">15-minute ahead DC power forecasting with RandomForest (R²=0.99) + agentic RAG pipeline using LangChain, FAISS and Groq LLM, deployed via Streamlit.</p>
+        <div class="project-tags">
+          <span class="tag">scikit-learn</span>
+          <span class="tag">LangChain</span>
+          <span class="tag">RAG</span>
+          <span class="tag">GenAI</span>
+          <span class="tag">Streamlit</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-role">Full Project</span>
+          <a class="project-link" href="https://github.com/Aviral02git" target="_blank">GitHub →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <p class="section-label">Technical Arsenal</p>
+    <h2>Skills & Tools</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-cell">
+      <p class="skill-category">Languages</p>
+      <p class="skill-items">Python<br>SQL<br>JavaScript</p>
+    </div>
+    <div class="skill-cell">
+      <p class="skill-category">Data Libraries</p>
+      <p class="skill-items">Pandas · NumPy<br>Matplotlib · Seaborn<br>scikit-learn</p>
+    </div>
+    <div class="skill-cell">
+      <p class="skill-category">Visualization</p>
+      <p class="skill-items">Tableau<br>Matplotlib<br>Seaborn</p>
+    </div>
+    <div class="skill-cell">
+      <p class="skill-category">GenAI / LLM</p>
+      <p class="skill-items">LangChain · FAISS<br>RAG pipelines<br>Groq / Llama</p>
+    </div>
+    <div class="skill-cell">
+      <p class="skill-category">Tools & Infra</p>
+      <p class="skill-items">Jupyter · Git<br>Streamlit · Docker<br>Excel</p>
+    </div>
+    <div class="skill-cell">
+      <p class="skill-category">Data Engineering</p>
+      <p class="skill-items">ETL pipelines<br>Feature Engineering<br>EDA · Data Cleaning</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <p class="section-label">Academic Background</p>
+    <h2>Education</h2>
+  </div>
+  <div class="edu-list">
+    <div class="edu-card">
+      <div>
+        <p class="edu-degree">B.Tech – Artificial Intelligence</p>
+        <p class="edu-school">Newton School of Technology, Rishihood University</p>
+      </div>
+      <div class="edu-score-block">
+        <p class="edu-score"></p>
+        <p class="edu-year">2024–2028 (Ongoing)</p>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div>
+        <p class="edu-degree">Intermediate – Class XII</p>
+        <p class="edu-school">Army Public School</p>
+      </div>
+      <div class="edu-score-block">
+        <p class="edu-score">89.8%</p>
+        <p class="edu-year">2022–2023</p>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div>
+        <p class="edu-degree">Matriculation – Class X</p>
+        <p class="edu-school">Army Public School</p>
+      </div>
+      <div class="edu-score-block">
+        <p class="edu-score">93.0%</p>
+        <p class="edu-year">2020–2021</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- GITHUB STATS -->
+<section>
+  <div class="section-header">
+    <p class="section-label">Open Source</p>
+    <h2>GitHub Activity</h2>
+  </div>
+  <div class="contrib-section">
+    <span class="contrib-num">3</span>
+    <p class="contrib-label">Public Projects on GitHub</p>
+    <div class="contrib-grid">
+      <div class="contrib-stat">
+        <p class="contrib-stat-num">68K+</p>
+        <p class="contrib-stat-label">Records Processed</p>
+      </div>
+      <div class="contrib-stat">
+        <p class="contrib-stat-num">0.99</p>
+        <p class="contrib-stat-label">Best ML R² Score</p>
+      </div>
+      <div class="contrib-stat">
+        <p class="contrib-stat-num">3-node</p>
+        <p class="contrib-stat-label">Agentic RAG System</p>
+      </div>
+    </div>
+    <div style="margin-top: 2rem;">
+      <a class="btn btn-ghost" href="https://github.com/Aviral02git" target="_blank" style="font-size:14px;">View GitHub Profile →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Aviral Mishra · Delhi NCR, India</p>
+  <p style="margin-top: 1rem;">
+    <a href="https://linkedin.com/in/aviral-mishra" target="_blank">LinkedIn</a> ·
+    <a href="https://github.com/Aviral02git" target="_blank">GitHub</a> ·
+    <a href="mailto:aviral.mishra2024@nst.rishihood.edu.in">Email</a>
+  </p>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal-content">
+    <button class="modal-close" onclick="closeModalDirect()">×</button>
+    <p class="modal-title" id="modal-title"></p>
+    <p class="modal-role" id="modal-role"></p>
+    <p class="modal-desc" id="modal-desc"></p>
+    <ul class="modal-highlights" id="modal-highlights"></ul>
+    <div class="modal-tags" id="modal-tags"></div>
+    <div class="modal-footer" id="modal-footer"></div>
+  </div>
+</div>
+
+<script>
+  const projects = {
+    'dva-capstone': {
+      title: 'DVA Capstone – Data Visualization & Analysis',
+      role: '🎓 DVA Capstone · Python · Pandas · Matplotlib · Jupyter · Git',
+      desc: 'Collaborative end-to-end data analytics project. Owned the data preprocessing and cleaning pipeline to prepare raw datasets for downstream analysis.',
+      highlights: [
+        'Handled missing value treatment, outlier detection, data type normalization, and feature-level transformations',
+        'Conducted EDA to identify trends, correlations, and anomalies',
+        'Contributed key insights to the team\\'s final visual storytelling and reporting',
+        'Maintained clean version control via Git across collaborative Jupyter workflows',
+      ],
+      tags: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'Jupyter', 'EDA', 'DVA'],
+      link: 'https://github.com/Aviral02git/DVA_capstone/tree/main',
+    },
+    'blinkit': {
+      title: 'Blinkit Sales, Delivery & Customer Analytics',
+      role: '📦 ETL & Analysis · Python · Tableau · Excel',
+      desc: 'Complete ETL pipeline on raw Blinkit operational data spanning sales, delivery operations, and customer behavior across 68,000+ records.',
+      highlights: [
+        'Designed and implemented full ETL pipeline on 68,000+ records',
+        'Feature engineering and in-depth EDA on revenue seasonality, peak-hour delivery bottlenecks',
+        'Built interactive Tableau dashboard — Business Overview, Delivery Efficiency, Customer Insights',
+        '~62% orders delayed, ~63% negative feedback identified; delivered targeted operational recommendations',
+      ],
+      tags: ['Python', 'Pandas', 'NumPy', 'Tableau', 'Excel', 'ETL', 'EDA'],
+      link: 'https://github.com/SwatiGhosh121/E_G-16_Blinkit-Sales-Analysis',
+    },
+    'solar': {
+      title: 'Solar Power Prediction – ML & GenAI Forecasting',
+      role: '☀️ Full Project · scikit-learn · LangChain · Streamlit · Docker',
+      desc: '2-milestone GenAI capstone: an ML forecasting pipeline + LangGraph agentic workflow for 15-minute ahead solar DC power prediction, deployed via Streamlit and Docker.',
+      highlights: [
+        'Engineered 9 features (lag, rolling mean, time-based, weather) on 68,778 inverter-level records',
+        'RandomForestRegressor achieved R² of 0.9905 (daytime) and 0.9323 (full dataset)',
+        'Implemented 3-node agentic RAG: forecast analysis → FAISS retrieval → LLM recommendations',
+        'LLM: Groq (Llama 3.1 8B) via LangChain & Sentence Transformers',
+      ],
+      tags: ['scikit-learn', 'LangChain', 'FAISS', 'Streamlit', 'Docker', 'Groq API', 'RAG', 'GenAI'],
+      link: 'https://github.com/Aviral02git',
+    },
+  };
+
+  function openModal(id) {
+    const p = projects[id];
+    document.getElementById('modal-title').textContent = p.title;
+    document.getElementById('modal-role').textContent = p.role;
+    document.getElementById('modal-desc').textContent = p.desc;
+    const hl = document.getElementById('modal-highlights');
+    hl.innerHTML = p.highlights.map(h => `<li>${h}</li>`).join('');
+    const tg = document.getElementById('modal-tags');
+    tg.innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+    const ft = document.getElementById('modal-footer');
+    ft.innerHTML = `<a class="btn btn-primary" href="${p.link}" target="_blank">View on GitHub →</a>`;
+    document.getElementById('modal-overlay').classList.add('open');
+  }
+
+  function closeModal(e) {
+    if (e.target === document.getElementById('modal-overlay')) closeModalDirect();
+  }
+  function closeModalDirect() {
+    document.getElementById('modal-overlay').classList.remove('open');
+  }
+
+  function filterProjects(tag, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.project-card').forEach(card => {
+      const tags = card.dataset.tags || '';
+      card.style.display = (tag === 'all' || tags.includes(tag)) ? '' : 'none';
+    });
+  }
+</script>
+</body>
+</html>

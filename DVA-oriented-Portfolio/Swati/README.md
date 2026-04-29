@@ -27,3 +27,5 @@ Static HTML and CSS portfolio for Data Visualization & Analytics case studies.
 - Blinkit GitHub: `https://github.com/SwatiGhosh121/E_G-16_Blinkit-Sales-Analysis`
 - Blinkit live Tableau: `https://public.tableau.com/app/profile/swati.ghosh3241/viz/DVA-Capstone/ExecutiveDashboard`
 - Uber GitHub: `https://github.com/SwatiGhosh121/Uber-Dashboard`
+
+Live url : https://swatighosh121.github.io/DVA_Portfolio_Main/

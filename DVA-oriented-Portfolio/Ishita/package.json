@@ -1,0 +1,14 @@
+{
+  "name": "dvaportfolio",
+  "version": "1.0.0",
+  "description": "Portfolio site",
+  "main": "index.html",
+  "scripts": {
+    "dev": "live-server --port=5500"
+  },
+  "author": "Ishita Thakur",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
